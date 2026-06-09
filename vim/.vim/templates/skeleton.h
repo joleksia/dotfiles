@@ -2,7 +2,7 @@
 # pragma once
 #endif
 #
-#if defined (_name_h_)
+#if !defined (_name_h_)
 # define _name_h_ 1
 
 /* ... */
