@@ -1,0 +1,79 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *  <<name>> - description 
+ *
+ *      - made by: <<author>>
+ *      - version: <<version>>
+ *      - licence: <<licence>>
+ *
+ *
+ *  Configuration (can be defined by user):
+ *
+ *      #define <<NAME>>_IMPLEMENTATION
+ *          - TYPE: MANDATORY
+ *          - DESCRIPTION: Embed the implementation section of the library into the source file.
+ *                         NOTE:
+ *                             This should be defined only once in the entire codebase.
+ *                             Otherwise, defining this option will cause a multiple-definitions error.
+ *
+ *
+ *  Constants (MUST NOT be defined by user):
+ *
+ *      <<NAME>>_PLATFORM 
+ *          - TYPE: String Literal
+ *          - DESCRIPTION: Name of the platform <<name>> is used on as a string literal.
+ * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#if defined (__cplusplus)
+# pragma once
+#endif
+#
+#if !defined (_<<name>>_h_)
+# define _<<name>>_h_ 1
+#
+# /* <<NAME>>DEF (<<name>>.h API) - global functions */
+# if !defined (<<NAME>>DEF)
+#  define <<NAME>>DEF extern
+# endif /* <<NAME>>DEF */
+#
+# /* <<NAME>>INT (<<name>>.h internal API) - internal static functions */
+# if !defined (<<NAME>>INT)
+#  define <<NAME>>INT static inline
+# endif /* <<NAME>>INT */
+#
+# /* Define platform macros */
+# if defined (__linux__)
+#  define <<NAME>>_PLATFORM "linux"
+#  define <<NAME>>_PLATFORM_LINUX 1
+#
+# elif defined (__APPLE__) || defined (__MACH__)
+#  define <<NAME>>_PLATFORM "apple"
+#  define <<NAME>>_PLATFORM_APPLE 1
+#
+# elif defined (__CYGWIN__) || defined (_WIN32)
+#  define <<NAME>>_PLATFORM "win32"
+#  define <<NAME>>_PLATFORM_WIN32 1
+#
+# elif defined (__FreeBSD__) || defined (__NetBSD__) || defined (__bsdi__) || defined (__DragonFly__) || defined (__MidnightBSD__)
+#  define <<NAME>>_PLATFORM "bsd"
+#  define <<NAME>>_PLATFORM_BSD 1
+#
+# else
+#  error /* No valid platform found */
+# endif
+#
+# include <stddef.h>
+# include <stdint.h>
+
+/* ... */
+
+# if defined <<NAME>>_IMPLEMENTATION
+#
+#  include <stdio.h>
+#  include <stdlib.h>
+
+/* ... */
+
+# endif /* <<NAME>>_IMPLEMENTATION */
+#endif /* _<<name>>_h_ */
