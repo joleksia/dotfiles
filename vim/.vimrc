@@ -303,24 +303,30 @@ if exists('+termguicolors')
 
 endif
 
-command! -nargs=0 Skeleton call _skeleton()
-function! _skeleton()
+command! -nargs=? -complete=customlist,_skeleton_complete Skeleton call _skeleton(<f-args>)
+function! _skeleton(...)
 
-    " get file extension
-    let l:ext = expand('%:e')
-    if empty(l:ext) " usually case for a file with no ext.: Makefile, Dockerfile etc.
+    " get extension from args
+    if a:0 > 0 && !empty(a:1)
+        let l:ext = a:1
 
-        let l:ext = &filetype
+    " otherwise, deduce extension based on the current file's extension
+    else
+        " get file extension
+        let l:ext = expand('%:e')
+        if empty(l:ext) " usually case for a file with no ext.: Makefile, Dockerfile etc.
 
+            let l:ext = &filetype
+
+        endif
+        if empty(l:ext) " unsupported file type...
+
+            echoerr 'Invalid file type: ' . l:ext
+            return
+
+        endif
     endif
-    if empty(l:ext) " unsupported file type...
 
-        echoerr 'Invalid file type: ' . l:ext
-        return
-
-    endif
-
-    " get the template file
     let l:template = expand('~/.vim/templates/skeleton.' . l:ext)
     if !filereadable(l:template)
 
@@ -331,5 +337,23 @@ function! _skeleton()
 
     " insert template
     execute '0r ' . fnameescape(l:template)
+
+endfunction
+
+function! _skeleton_complete(ArgLead, CmdLine, CursorPos)
+
+    " get the list of templates
+    let l:templates = glob(resolve(expand('~/.vim/templates/')) . 'skeleton.*', 0, 1)
+
+    " get the list of names from templates
+    let l:names = map(l:templates, {_, f -> fnamemodify(f, ':e')})
+    
+    if empty(a:ArgLead)
+    
+        return (l:names)
+    
+    endif
+
+    return (filter(l:names, {_, n -> n =~ '^' . a:ArgLead}))
 
 endfunction
