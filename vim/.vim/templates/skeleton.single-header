@@ -21,7 +21,7 @@
  *
  *      <<NAME>>_PLATFORM 
  *          - TYPE: String Literal
- *          - DESCRIPTION: Name of the platform <<name>> is used on as a string literal.
+ *          - DESCRIPTION: Name of the platform <<name>>.h is used on as a string literal.
  * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -31,6 +31,8 @@
 #
 #if !defined (_<<name>>_h_)
 # define _<<name>>_h_ 1
+#
+# define <<NAME>>_VERSION "<<version>>"
 #
 # /* <<NAME>>DEF (<<name>>.h API) - global functions */
 # if !defined (<<NAME>>DEF)
