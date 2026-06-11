@@ -1,8 +1,8 @@
 #pragma once
 #
-#if !defined (_name_hpp_)
-# define _name_hpp_ 1
+#if defined (_<<name>>_hpp_)
+# define _<<name>>_hpp_ 1
 
 /* ... */
 
-#endif /* _name_hpp_ */
+#endif /* _<<name>>_hpp_ */
