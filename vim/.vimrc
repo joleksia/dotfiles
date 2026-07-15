@@ -149,6 +149,19 @@ set incsearch
 " "
 set noshowmode
 
+" :h fold
+" "
+"
+" There are six methods to select folds:
+" 	manual		manually define folds
+" 	indent		more indent means a higher fold level
+" 	expr		specify an expression to define folds
+" 	syntax		folds defined by syntax highlighting
+" 	diff		folds for unchanged text
+" 	marker		folds defined by markers in the text
+" "
+set foldmethod=marker
+
 " :h netwr
 " :h netwr-browser-settings
 " :h netwr-browser-options
