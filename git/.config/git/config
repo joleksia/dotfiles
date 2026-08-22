@@ -1,0 +1,8 @@
+[user]
+    name = Jakub Oleksiak
+    email = yakubofficialmail@gmail.com
+    username = joleksia
+
+[core]
+    editor = vim
+    pager = less
